@@ -1,808 +1,477 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fondamentaux d'Excel pour débutants — Kablan ANOH</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            blue: '#3B82F6',
-                            blueDark: '#1D4ED8',
-                            amber: '#F59E0B',
-                            slate: '#1E293B',
-                            slateLight: '#334155',
-                            greyLight: '#F1F5F9',
-                        }
-                    },
-                    fontFamily: {
-                        heading: ['Outfit', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        
-        /* Custom Excel Grid Styling */
-        .excel-grid input:focus {
-            outline: 2px solid #3B82F6;
-            outline-offset: -2px;
-            background-color: #EFF6FF;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fondamentaux d'Excel pour débutants - Mini-formation</title>
+  
+  <!-- Polices Google Fonts (Charte Option 2 : Modernité Dynamique) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #3B82F6;       /* Bleu Vif */
+      --primary-hover: #2563EB;
+      --accent: #F59E0B;        /* Ambre */
+      --accent-hover: #D97706;
+      --bg-dark: #1E293B;       /* Ardoise sombre */
+      --bg-light: #F8FAFC;      /* Background clair */
+      --card-bg: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* En-tête / Hero Section */
+    header {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0F172A 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      border: 1px solid var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #94A3B8;
+      max-width: 700px;
+      margin: 0 auto 25px auto;
+    }
+
+    .author-tag {
+      font-size: 0.95rem;
+      color: #CBD5E1;
+    }
+
+    /* Section Présentation & Vidéo */
+    .section-padding {
+      padding: 60px 0;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 2.1rem; }
+    }
+
+    .video-card {
+      background: black;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      aspect-ratio: 16/9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .video-placeholder-text {
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Modules */
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--bg-dark);
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px -5px rgba(59, 130, 246, 0.15);
+    }
+
+    .module-number {
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-family: var(--font-title);
+    }
+
+    .module-card h3 {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .module-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      flex-grow: 1;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    /* Simulation Excel Interactive (Module 2) */
+    .demo-section {
+      background: #EFF6FF;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0;
+      border: 1px solid #BFDBFE;
+    }
+
+    .excel-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-top: 15px;
+    }
+
+    .excel-table th, .excel-table td {
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .excel-table th {
+      background: #F1F5F9;
+      font-family: var(--font-title);
+    }
+
+    .excel-input {
+      width: 80px;
+      padding: 4px 8px;
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Quiz Interactive */
+    .quiz-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .quiz-option {
+      display: block;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      background: #F8FAFC;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-dark);
+      color: #94A3B8;
+      padding: 40px 0;
+      font-size: 0.9rem;
+      border-top: 1px solid #334155;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-brand-slate antialiased selection:bg-brand-blue selection:text-white">
+<body>
 
-    <!-- NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Title -->
-                <div class="flex items-center space-x-3">
-                    <div class="bg-brand-blue text-white p-2 rounded-xl shadow-md flex items-center justify-center w-10 h-10 font-bold font-heading text-xl">
-                        <i class="fa-solid font-bold fa-file-excel"></i>
-                    </div>
-                    <div>
-                        <span class="font-heading font-bold text-lg leading-tight block text-brand-slate">Excel Débutant</span>
-                        <span class="text-xs text-slate-500 font-medium">Par Kablan ANOH</span>
-                    </div>
-                </div>
+  <!-- HERO HEADER -->
+  <header>
+    <div class="container">
+      <span class="hero-badge">Formation en 17 minutes</span>
+      <h1>Fondamentaux d'Excel pour débutants</h1>
+      <p class="hero-subtitle">Créez votre tout premier tableau professionnel, maîtrisez les calculs automatiques et exportez en PDF sans stress.</p>
+      <p class="author-tag">Présenté par <strong>Kablan ANOH</strong></p>
+    </div>
+  </header>
 
-                <!-- Desktop Nav Links -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="#accueil" class="text-slate-600 hover:text-brand-blue transition-colors">Accueil</a>
-                    <a href="#presentation" class="text-slate-600 hover:text-brand-blue transition-colors">Présentation</a>
-                    <a href="#modules" class="text-slate-600 hover:text-brand-blue transition-colors">Modules</a>
-                    <a href="#simulation" class="text-slate-600 hover:text-brand-blue transition-colors">Démo Interactive</a>
-                    <a href="#quiz" class="text-slate-600 hover:text-brand-blue transition-colors">Quiz</a>
-                </nav>
+  <!-- APERÇU ET VIDÉO AVATAR -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="video-grid">
+        <div>
+          <h2 style="font-family: var(--font-title); margin-bottom: 15px;">Bienvenue dans votre formation</h2>
+          <p style="margin-bottom: 15px;">Vous trouvez l'interface d'Excel déroutante avec ses lignes, ses colonnes et son Ruban ? Les formules vous semblent réservées aux experts ?</p>
+          <p style="margin-bottom: 20px;">Découvrez cette présentation vidéo d'introduction générée par IA pour aborder les 3 modules en toute confiance !</p>
+          <a href="#modules" class="btn btn-primary">Découvrir les modules</a>
+        </div>
+        <div class="video-card">
+          <div class="video-placeholder-text">
+            <p style="font-size: 2rem; margin-bottom: 10px;">▶️</p>
+            <p><strong>Vidéo d'Aperçu (Avatar IA)</strong></p>
+            <p style="font-size: 0.8rem; color: #94A3B8;">Durée : 1 min 30 s</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <!-- CTA Button -->
-                <div class="hidden sm:flex items-center">
-                    <a href="#modules" class="bg-brand-blue hover:bg-brand-blueDark text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-md shadow-blue-500/20 transition-all hover:scale-105">
-                        Commencer (17 min)
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
+  <!-- PROGRAMME DES MODULES -->
+  <section id="modules" class="section-padding" style="background: white;">
+    <div class="container">
+      <h2 class="section-title">Le Programme de la Formation</h2>
+      <div class="modules-grid">
+        
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-number">01</div>
+          <h3>Interface & Première Saisie</h3>
+          <p>Apprenez à vous repérer dans l'interface, comprendre le Ruban, sélectionner les cellules et saisir vos premières données proprement (5 min).</p>
+          <a href="#" class="btn btn-outline">Télécharger la Fiche PDF</a>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-3">
-            <a href="#accueil" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Accueil</a>
-            <a href="#presentation" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Présentation</a>
-            <a href="#modules" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Modules</a>
-            <a href="#simulation" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Démo Interactive</a>
-            <a href="#quiz" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Quiz</a>
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-number">02</div>
+          <h3>Formules, SOMME & MOYENNE</h3>
+          <p>Découvrez la puissance du signe égal (=), automatisez vos calculs avec SOMME et MOYENNE, et observez la mise à jour dynamique (5 min).</p>
+          <a href="#demo" class="btn btn-outline">Tester la Démo Interactive</a>
         </div>
-    </header>
 
-    <!-- HERO BANNER SECTION -->
-    <section id="accueil" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-blue-50/60 via-slate-50 to-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Left Column Text -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-brand-blue text-xs font-semibold uppercase tracking-wide">
-                        <i class="fa-solid fa-bolt text-brand-amber"></i> Mini-cours Express &bull; 17 minutes
-                    </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-slate tracking-tight leading-tight">
-                        Fondamentaux d'Excel <br class="hidden sm:block">
-                        <span class="text-brand-blue">pour débutants</span>
-                    </h1>
-                    
-                    <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Votre premier tableau Excel propre, automatisé et prêt à être partagé en seulement 17 minutes chrono.
-                    </p>
-
-                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#presentation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-blueDark text-white px-7 py-3.5 rounded-xl text-base font-bold shadow-lg shadow-blue-500/25 transition-all hover:-translate-y-0.5">
-                            <i class="fa-solid fa-circle-play"></i> Regarder l'introduction
-                        </a>
-                        <a href="#modules" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-6 py-3.5 rounded-xl text-base font-semibold shadow-sm transition-all">
-                            Voir le programme
-                        </a>
-                    </div>
-
-                    <!-- Instructor Badge -->
-                    <div class="pt-6 border-t border-slate-200/80 flex items-center justify-center lg:justify-start gap-3">
-                        <div class="w-11 h-11 rounded-full bg-brand-slate text-white flex items-center justify-center font-bold font-heading text-lg shadow-inner">
-                            KA
-                        </div>
-                        <div class="text-left">
-                            <p class="text-sm font-bold text-brand-slate">Kablan ANOH</p>
-                            <p class="text-xs text-slate-500">Formateur & Designer Pédagogique</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column Graphic Card -->
-                <div class="lg:col-span-5">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <!-- Background Glow Decorative Shapes -->
-                        <div class="absolute -top-6 -left-6 w-48 h-48 bg-brand-blue/20 rounded-full filter blur-2xl"></div>
-                        <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-amber/20 rounded-full filter blur-2xl"></div>
-
-                        <!-- Card Illustration -->
-                        <div class="relative bg-white rounded-2xl shadow-xl border border-slate-200/80 p-6 sm:p-8 space-y-6">
-                            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-red-400"></div>
-                                    <div class="w-3 h-3 rounded-full bg-amber-400"></div>
-                                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
-                                </div>
-                                <span class="text-xs font-mono text-slate-400">Feuille1.xlsx</span>
-                            </div>
-
-                            <!-- Spreadsheet Mock Preview -->
-                            <div class="space-y-2 font-mono text-xs">
-                                <div class="grid grid-cols-3 gap-2 bg-brand-blue text-white p-2.5 rounded-lg font-sans font-semibold">
-                                    <span>Poste</span>
-                                    <span class="text-right">Montant</span>
-                                    <span class="text-center">Statut</span>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2 p-2 bg-slate-50 rounded border border-slate-100">
-                                    <span>Courses</span>
-                                    <span class="text-right font-medium">45 €</span>
-                                    <span class="text-center text-emerald-600 font-sans text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded-full font-bold">Validé</span>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2 p-2 bg-slate-50 rounded border border-slate-100">
-                                    <span>Transport</span>
-                                    <span class="text-right font-medium">18 €</span>
-                                    <span class="text-center text-emerald-600 font-sans text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded-full font-bold">Validé</span>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2 p-2 bg-amber-50 rounded border border-amber-200">
-                                    <span class="font-bold font-sans text-brand-slate">TOTAL</span>
-                                    <span class="text-right font-bold text-brand-blue">=SOMME(...)</span>
-                                    <span class="text-center text-amber-700 font-sans text-[10px] bg-amber-100 px-1.5 py-0.5 rounded-full font-bold">Auto</span>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between text-xs text-slate-500 pt-2">
-                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Sans aucun jargon</span>
-                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> 100% Débutant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-number">03</div>
+          <h3>Mise en forme & Export PDF</h3>
+          <p>Sublimez vos tableaux avec des en-têtes colorés et apprenez la méthode exacte pour enregistrer ou imprimer un document PDF impeccable (5 min).</p>
+          <a href="#quiz" class="btn btn-outline">Passer le Quiz Final</a>
         </div>
-    </section>
 
-    <!-- PRESENTATION & AVATAR VIDEO SECTION -->
-    <section id="presentation" class="py-16 bg-white border-y border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center space-y-4 mb-12">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-slate">Pourquoi cette formation ?</h2>
-                <p class="text-slate-600 text-base sm:text-lg">
-                    Découvrir Excel peut sembler intimidant au premier abord. Voici comment nous débloquons votre apprentissage en quelques minutes.
-                </p>
-            </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Video Player Placeholder -->
-                <div class="lg:col-span-7">
-                    <div class="relative bg-brand-slate rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group">
-                        <!-- Thumbnail / Mock Player -->
-                        <div id="videoContainer" class="relative aspect-video bg-gradient-to-tr from-slate-900 to-slate-800 flex items-center justify-center p-6 text-center">
-                            
-                            <!-- Video Intro Overlay State -->
-                            <div id="videoPoster" class="absolute inset-0 flex flex-col items-center justify-center p-6 bg-slate-900/80 backdrop-blur-xs text-white space-y-4 transition-opacity">
-                                <div class="w-16 h-16 rounded-full bg-brand-blue flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/40 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-play ml-1"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-heading font-bold text-xl">Vidéo d'Aperçu (1 min 30)</h3>
-                                    <p class="text-xs text-slate-300">Présenté par votre Avatar IA Pédagogique</p>
-                                </div>
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-slate-200">
-                                    <i class="fa-solid fa-closed-captioning"></i> Sous-titres intégrés
-                                </span>
-                            </div>
+  <!-- DÉMO INTERACTIVE EXCEL (MODULE 2) -->
+  <section id="demo" class="section-padding">
+    <div class="container">
+      <div class="demo-section">
+        <h3 style="font-family: var(--font-title); margin-bottom: 10px;">⚡ Démo Interactive : Le pouvoir des formules</h3>
+        <p>Modifiez les montants ci-dessous pour voir comment le **Total (SOMME)** et la **Moyenne** se recalculent automatiquement :</p>
+        
+        <table class="excel-table">
+          <thead>
+            <tr>
+              <th>Poste de dépense</th>
+              <th>Montant (€)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Courses</td>
+              <td><input type="number" id="val1" class="excel-input" value="45" oninput="calculateExcel()"></td>
+            </tr>
+            <tr>
+              <td>Transport</td>
+              <td><input type="number" id="val2" class="excel-input" value="18" oninput="calculateExcel()"></td>
+            </tr>
+            <tr>
+              <td>Loisirs</td>
+              <td><input type="number" id="val3" class="excel-input" value="30" oninput="calculateExcel()"></td>
+            </tr>
+            <tr>
+              <td>Internet</td>
+              <td><input type="number" id="val4" class="excel-input" value="22" oninput="calculateExcel()"></td>
+            </tr>
+            <tr style="background: #FEF3C7; font-weight: bold;">
+              <td>Total (=SOMME)</td>
+              <td id="total-val" style="color: var(--accent-hover);">115 €</td>
+            </tr>
+            <tr style="background: #E0F2FE; font-weight: bold;">
+              <td>Moyenne (=MOYENNE)</td>
+              <td id="avg-val" style="color: var(--primary-hover);">28.75 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
-                            <!-- Simulated Interactive Player overlay -->
-                            <div id="videoMessage" class="hidden text-white space-y-4 max-w-md">
-                                <div class="p-4 bg-slate-800/90 rounded-xl border border-slate-700 text-left space-y-2">
-                                    <div class="flex items-center gap-2 text-brand-amber font-semibold text-xs">
-                                        <i class="fa-solid fa-circle-dot animate-pulse"></i> SIMULATION LECTURE VIDÉO AVATAR
-                                    </div>
-                                    <p class="text-sm italic text-slate-200">
-                                        « Bonjour ! Bienvenue dans cette formation. En 17 minutes, nous allons transformer votre appréhension d'Excel en une maîtrise sereine des fondamentaux... »
-                                    </p>
-                                </div>
-                                <button onclick="resetVideo()" class="text-xs text-slate-400 hover:text-white underline">Revoir la miniature</button>
-                            </div>
+  <!-- QUIZ AUTO-ÉVALUATION -->
+  <section id="quiz" class="section-padding" style="background: white;">
+    <div class="container">
+      <h2 class="section-title">Testez vos connaissances</h2>
+      <div class="quiz-box">
+        <p style="font-weight: 600; margin-bottom: 15px;">Par quel symbole doit TOUJOURS commencer une formule dans Excel ?</p>
+        <label class="quiz-option">
+          <input type="radio" name="q1" value="wrong"> A) Le symbole +
+        </label>
+        <label class="quiz-option">
+          <input type="radio" name="q1" value="correct"> B) Le signe égal (=)
+        </label>
+        <label class="quiz-option">
+          <input type="radio" name="q1" value="wrong"> C) Le mot SOMME
+        </label>
+        <button class="btn btn-primary" style="margin-top: 15px;" onclick="checkQuiz()">Valider ma réponse</button>
+        <p id="quiz-result" style="margin-top: 15px; font-weight: 600;"></p>
+      </div>
+    </div>
+  </section>
 
-                            <button onclick="playSimulatedVideo()" class="absolute inset-0 w-full h-full cursor-pointer opacity-0" aria-label="Lire la vidéo"></button>
-                        </div>
+  <!-- PIED DE PAGE / CRÉDITS & AUDIT -->
+  <footer>
+    <div class="container" style="text-align: center;">
+      <p style="margin-bottom: 10px;"><strong>Fondamentaux d'Excel pour débutants</strong> — Conçu par Kablan ANOH</p>
+      <p style="font-size: 0.85rem; color: #64748B; max-width: 600px; margin: 0 auto 15px auto;">
+        Transparence IA : Les scripts pédagogiques, visuels et avatar ont été conçus avec l'assistance d'outils d'IA (Claude, Gemini, HeyGen, CapCut) conformément au cadre de production du projet.
+      </p>
+      <p style="font-size: 0.8rem;">© 2026 Tous droits réservés. Aucune donnée personnelle conservée.</p>
+    </div>
+  </footer>
 
-                        <!-- Video Controls Bar (UI Mock) -->
-                        <div class="bg-slate-900 px-4 py-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-robot text-brand-blue"></i> Generative AI Avatar</span>
-                            <span>01:30 / 01:30</span>
-                        </div>
-                    </div>
-                </div>
+  <!-- SCRIPT JAVASCRIPT INTERACTIF -->
+  <script>
+    // Calcul dynamique de la démo Excel
+    function calculateExcel() {
+      const v1 = parseFloat(document.getElementById('val1').value) || 0;
+      const v2 = parseFloat(document.getElementById('val2').value) || 0;
+      const v3 = parseFloat(document.getElementById('val3').value) || 0;
+      const v4 = parseFloat(document.getElementById('val4').value) || 0;
 
-                <!-- Pain Points & Solutions -->
-                <div class="lg:col-span-5 space-y-6">
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0 font-bold mt-0.5">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-sm">Une interface déroutante ?</h4>
-                                <p class="text-xs text-slate-600 leading-relaxed mt-0.5">
-                                    Lignes, colonnes, cellules, ruban... On ne sait jamais par où commencer.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3 pt-2 border-t border-slate-200/60">
-                            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold mt-0.5">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-blue text-sm">La solution : La méthode guidée</h4>
-                                <p class="text-xs text-slate-600 leading-relaxed mt-0.5">
-                                    Nous isolons uniquement les 20% de l'interface indispensables pour 80% de vos besoins.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+      const total = v1 + v2 + v3 + v4;
+      const average = total / 4;
 
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0 font-bold mt-0.5">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-sm">Peur des formules de calcul ?</h4>
-                                <p class="text-xs text-slate-600 leading-relaxed mt-0.5">
-                                    Le signe égal et les fonctions semblent complexes au premier abord.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3 pt-2 border-t border-slate-200/60">
-                            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold mt-0.5">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-blue text-sm">La solution : Automatisation simple</h4>
-                                <p class="text-xs text-slate-600 leading-relaxed mt-0.5">
-                                    Apprenez uniquement SOMME et MOYENNE pour calculer sans aucun risque d'erreur humaine.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      document.getElementById('total-val').innerText = total + " €";
+      document.getElementById('avg-val').innerText = average.toFixed(2) + " €";
+    }
 
-    <!-- THE 3 MODULES SECTION -->
-    <section id="modules" class="py-16 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center space-y-4 mb-14">
-                <span class="text-brand-blue font-semibold text-xs uppercase tracking-wider">Programme de la formation</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-slate">Les 3 Modules Pédagogiques</h2>
-                <p class="text-slate-600 text-base">Un parcours structuré pas-à-pas conçu pour aller droit à l'essentiel.</p>
-            </div>
+    // Validation du Quiz
+    function checkQuiz() {
+      const options = document.getElementsByName('q1');
+      let selected = false;
+      let correct = false;
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Module 1 Card -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
-                    <div class="p-6 bg-gradient-to-br from-blue-50 to-white border-b border-slate-100 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 bg-brand-blue text-white text-xs font-bold rounded-full">Module 1</span>
-                            <span class="text-xs font-semibold text-slate-500"><i class="fa-regular fa-clock"></i> 5 minutes</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-brand-slate group-hover:text-brand-blue transition-colors">
-                            Interface & Première Saisie
-                        </h3>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between space-y-6">
-                        <ul class="space-y-3 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Comprendre le quadrillage (colonnes A, B / lignes 1, 2)</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Repérer le Ruban et la barre de formule</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Saisir correctement du texte et des nombres (Touche Entrée)</span>
-                            </li>
-                        </ul>
-                        <div class="pt-4 border-t border-slate-100">
-                            <button onclick="downloadHandout('Module 1')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-blue hover:text-white text-slate-700 py-2.5 rounded-xl text-xs font-bold transition-all">
-                                <i class="fa-solid fa-file-pdf"></i> Télécharger la fiche PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Module 2 Card -->
-                <div class="bg-white rounded-2xl border-2 border-brand-blue/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative">
-                    <div class="absolute top-0 right-0 bg-brand-amber text-slate-900 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-lg">
-                        Clé de voûte
-                    </div>
-                    <div class="p-6 bg-gradient-to-br from-blue-50/80 to-white border-b border-slate-100 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 bg-brand-blue text-white text-xs font-bold rounded-full">Module 2</span>
-                            <span class="text-xs font-semibold text-slate-500"><i class="fa-regular fa-clock"></i> 5 minutes</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-brand-slate group-hover:text-brand-blue transition-colors">
-                            Formules : SOMME & MOYENNE
-                        </h3>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between space-y-6">
-                        <ul class="space-y-3 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>La règle d'or : Toujours démarrer par le signe égal (<code class="bg-slate-100 px-1 py-0.5 rounded font-mono font-bold text-brand-blue">=</code>)</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Calculer un Total automatique avec <code class="bg-slate-100 px-1 py-0.5 rounded font-mono font-bold text-brand-blue">SOMME</code></span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Obtenir une moyenne en un clic avec <code class="bg-slate-100 px-1 py-0.5 rounded font-mono font-bold text-brand-blue">MOYENNE</code></span>
-                            </li>
-                        </ul>
-                        <div class="pt-4 border-t border-slate-100">
-                            <a href="#simulation" class="w-full inline-flex items-center justify-center gap-2 bg-brand-blue text-white hover:bg-brand-blueDark py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
-                                <i class="fa-solid fa-calculator"></i> Tester la démo en direct
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Module 3 Card -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
-                    <div class="p-6 bg-gradient-to-br from-blue-50 to-white border-b border-slate-100 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 bg-brand-blue text-white text-xs font-bold rounded-full">Module 3</span>
-                            <span class="text-xs font-semibold text-slate-500"><i class="fa-regular fa-clock"></i> 5 minutes</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-brand-slate group-hover:text-brand-blue transition-colors">
-                            Mise en Forme & Export PDF
-                        </h3>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between space-y-6">
-                        <ul class="space-y-3 text-sm text-slate-600">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Alignements professionnels (textes à gauche, chiffres à droite)</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Appliquer des bordures et des couleurs d'en-tête élégantes</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-check text-brand-blue mt-1 shrink-0"></i>
-                                <span>Exporter un document propre et non modifiable au format PDF</span>
-                            </li>
-                        </ul>
-                        <div class="pt-4 border-t border-slate-100">
-                            <button onclick="downloadHandout('Module 3')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-blue hover:text-white text-slate-700 py-2.5 rounded-xl text-xs font-bold transition-all">
-                                <i class="fa-solid fa-file-pdf"></i> Télécharger la fiche PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- INTERACTIVE EXCEL DEMO SIMULATION (MODULE 2 LIVE) -->
-    <section id="simulation" class="py-16 bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center space-y-3 mb-10">
-                <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold uppercase tracking-wider">Atelier Pratique</span>
-                <h2 class="text-3xl font-extrabold text-brand-slate">Démo Interactive : Testez l'Automatisation</h2>
-                <p class="text-slate-600 text-sm sm:text-base">
-                    Modifiez une valeur dans la colonne <strong class="text-brand-slate">« Montant »</strong> ci-dessous. Observez comment le <strong class="text-brand-blue">Total</strong> et la <strong class="text-brand-blue">Moyenne</strong> se recalculent instantanément !
-                </p>
-            </div>
-
-            <!-- Excel Spreadsheet Simulator Container -->
-            <div class="max-w-2xl mx-auto bg-white rounded-2xl border-2 border-slate-300 shadow-xl overflow-hidden font-sans">
-                <!-- Toolbar Header -->
-                <div class="bg-slate-800 text-white p-3 flex items-center justify-between text-xs font-mono">
-                    <div class="flex items-center gap-2">
-                        <span class="bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">XLSX</span>
-                        <span class="text-slate-300">Exercice_Guidé_Module2.xlsx</span>
-                    </div>
-                    <div class="text-emerald-400 font-semibold flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate animate-spin text-[10px]"></i> Recalcul Auto Actif
-                    </div>
-                </div>
-
-                <!-- Formula Bar Simulation -->
-                <div class="bg-slate-100 p-2.5 border-b border-slate-300 flex items-center gap-3 text-xs font-mono">
-                    <span class="font-bold text-slate-500 bg-white px-2 py-1 border border-slate-300 rounded">B6</span>
-                    <span class="text-slate-400 font-bold">=</span>
-                    <div id="formulaDisplay" class="flex-1 bg-white px-3 py-1 border border-slate-300 rounded text-brand-blue font-bold">
-                        =SOMME(B2:B5)
-                    </div>
-                </div>
-
-                <!-- Grid Table -->
-                <div class="excel-grid overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
-                        <thead>
-                            <tr class="bg-slate-200/80 text-slate-600 text-center font-mono select-none">
-                                <th class="w-12 border-b border-r border-slate-300 py-1.5"></th>
-                                <th class="border-b border-r border-slate-300 py-1.5 font-bold">A</th>
-                                <th class="border-b border-slate-300 py-1.5 font-bold">B</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-200">
-                            <!-- Header Row -->
-                            <tr class="bg-brand-blue text-white font-semibold">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">1</td>
-                                <td class="px-4 py-2 border-r border-blue-400">Poste de dépense</td>
-                                <td class="px-4 py-2 text-right">Montant (€)</td>
-                            </tr>
-                            <!-- Data Row 1 -->
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">2</td>
-                                <td class="px-4 py-2 border-r border-slate-200 font-medium">Courses</td>
-                                <td class="px-2 py-1">
-                                    <input type="number" id="val1" value="45" oninput="calculateExcelDemo()" class="w-full text-right p-1.5 font-mono rounded border border-slate-200 focus:border-brand-blue">
-                                </td>
-                            </tr>
-                            <!-- Data Row 2 -->
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">3</td>
-                                <td class="px-4 py-2 border-r border-slate-200 font-medium">Transport</td>
-                                <td class="px-2 py-1">
-                                    <input type="number" id="val2" value="18" oninput="calculateExcelDemo()" class="w-full text-right p-1.5 font-mono rounded border border-slate-200 focus:border-brand-blue">
-                                </td>
-                            </tr>
-                            <!-- Data Row 3 -->
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">4</td>
-                                <td class="px-4 py-2 border-r border-slate-200 font-medium">Loisirs</td>
-                                <td class="px-2 py-1">
-                                    <input type="number" id="val3" value="30" oninput="calculateExcelDemo()" class="w-full text-right p-1.5 font-mono rounded border border-slate-200 focus:border-brand-blue">
-                                </td>
-                            </tr>
-                            <!-- Data Row 4 -->
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">5</td>
-                                <td class="px-4 py-2 border-r border-slate-200 font-medium">Internet</td>
-                                <td class="px-2 py-1">
-                                    <input type="number" id="val4" value="22" oninput="calculateExcelDemo()" class="w-full text-right p-1.5 font-mono rounded border border-slate-200 focus:border-brand-blue">
-                                </td>
-                            </tr>
-                            <!-- Total Row -->
-                            <tr class="bg-blue-50/90 font-bold text-brand-slate border-t-2 border-brand-blue">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">6</td>
-                                <td class="px-4 py-2 border-r border-slate-300">TOTAL (=SOMME)</td>
-                                <td id="resTotal" class="px-4 py-2 text-right font-mono text-brand-blue text-base">115.00 €</td>
-                            </tr>
-                            <!-- Average Row -->
-                            <tr class="bg-amber-50/90 font-bold text-brand-slate">
-                                <td class="bg-slate-200/80 text-slate-600 font-mono text-center border-r border-slate-300 select-none py-2">7</td>
-                                <td class="px-4 py-2 border-r border-slate-300">MOYENNE (=MOYENNE)</td>
-                                <td id="resAverage" class="px-4 py-2 text-right font-mono text-brand-amber text-base">28.75 €</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Tip Footer -->
-                <div class="bg-slate-100 p-3 border-t border-slate-300 text-xs text-slate-600 flex items-center justify-between">
-                    <span><i class="fa-solid fa-lightbulb text-brand-amber"></i> Astuce : Essayez d'écrire <strong>55</strong> à la place de 45.</span>
-                    <button onclick="resetExcelDemo()" class="text-brand-blue hover:underline font-semibold">Réinitialiser</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INTERACTIVE QUIZ SECTION -->
-    <section id="quiz" class="py-16 bg-slate-100 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-3 mb-10">
-                <span class="px-3 py-1 bg-brand-blue text-white rounded-full text-xs font-bold uppercase tracking-wider">Évaluation</span>
-                <h2 class="text-3xl font-extrabold text-brand-slate">Validation des Acquis</h2>
-                <p class="text-slate-600 text-sm sm:text-base">Répondez à ces 3 questions rapides pour obtenir votre validation.</p>
-            </div>
-
-            <!-- Quiz Card -->
-            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-10 space-y-8">
-                
-                <!-- Progress Bar -->
-                <div class="space-y-2">
-                    <div class="flex justify-between text-xs font-bold text-slate-500">
-                        <span id="quizProgressText">Question 1 sur 3</span>
-                        <span id="quizScoreText">Score : 0 / 3</span>
-                    </div>
-                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div id="quizProgressBar" class="h-full bg-brand-blue w-1/3 transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <!-- Question Box -->
-                <div id="quizContent" class="space-y-6">
-                    <!-- Dynamic Question Inserted by JS -->
-                </div>
-
-                <!-- Quiz Completion Screen (Hidden by Default) -->
-                <div id="quizResultScreen" class="hidden text-center space-y-6 py-6">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-3xl font-bold">
-                        <i class="fa-solid fa-trophy text-brand-amber"></i>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="text-2xl font-bold text-brand-slate">Félicitations !</h3>
-                        <p id="finalScoreMessage" class="text-slate-600 text-base"></p>
-                    </div>
-                    <button onclick="restartQuiz()" class="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-blueDark text-white px-6 py-3 rounded-xl font-semibold shadow-md transition-all">
-                        <i class="fa-solid fa-rotate-right"></i> Recommencer le quiz
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER & COMPLIANCE -->
-    <footer class="bg-brand-slate text-slate-300 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                <!-- Col 1: Author -->
-                <div class="md:col-span-5 space-y-3">
-                    <h4 class="font-heading font-bold text-white text-lg">Fondamentaux d'Excel pour débutants</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
-                        Conçu par <strong>Kablan ANOH</strong>. Une mini-formation express visant l'autonomie rapide sur les fonctions essentielles du tableur.
-                    </p>
-                </div>
-
-                <!-- Col 2: AI Transparency -->
-                <div class="md:col-span-4 space-y-3">
-                    <h5 class="font-heading font-bold text-white text-sm">Transparence & Outils IA</h5>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Cette formation a été élaborée avec l'assistance d'outils d'IA Pédagogique (Claude, Gemini, HeyGen, CapCut) pour le cadrage, les scripts, les visuels et l'avatar.
-                    </p>
-                </div>
-
-                <!-- Col 3: Compliance & GDPR -->
-                <div class="md:col-span-3 space-y-3">
-                    <h5 class="font-heading font-bold text-white text-sm">Conformité & RGPD</h5>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Aucune donnée personnelle n'est collectée sans consentement explicit. Quiz entièrement anonyme exécuté localement.
-                    </p>
-                </div>
-            </div>
-
-            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-                <p>&copy; 2026 Kablan ANOH &bull; Tous droits réservés.</p>
-                <div class="flex items-center space-x-4">
-                    <span class="hover:text-slate-300">Option 2 : Modernité Dynamique</span>
-                    <span>&bull;</span>
-                    <span class="hover:text-slate-300">WCAG AAA Compliant</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // --- 1. MOBILE MENU TOGGLE ---
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // --- 2. SIMULATED VIDEO PLAYER ---
-        function playSimulatedVideo() {
-            document.getElementById('videoPoster').classList.add('opacity-0', 'pointer-events-none');
-            document.getElementById('videoMessage').classList.remove('hidden');
+      for (const option of options) {
+        if (option.checked) {
+          selected = true;
+          if (option.value === 'correct') correct = true;
         }
+      }
 
-        function resetVideo() {
-            document.getElementById('videoPoster').classList.remove('opacity-0', 'pointer-events-none');
-            document.getElementById('videoMessage').classList.add('hidden');
-        }
-
-        // --- 3. EXCEL DEMO LIVE SIMULATION (MODULE 2) ---
-        function calculateExcelDemo() {
-            const v1 = parseFloat(document.getElementById('val1').value) || 0;
-            const v2 = parseFloat(document.getElementById('val2').value) || 0;
-            const v3 = parseFloat(document.getElementById('val3').value) || 0;
-            const v4 = parseFloat(document.getElementById('val4').value) || 0;
-
-            const total = v1 + v2 + v3 + v4;
-            const average = total / 4;
-
-            document.getElementById('resTotal').innerText = total.toFixed(2) + ' €';
-            document.getElementById('resAverage').innerText = average.toFixed(2) + ' €';
-        }
-
-        function resetExcelDemo() {
-            document.getElementById('val1').value = 45;
-            document.getElementById('val2').value = 18;
-            document.getElementById('val3').value = 30;
-            document.getElementById('val4').value = 22;
-            calculateExcelDemo();
-        }
-
-        // --- 4. DOWNLOAD HANDOUT SIMULATION ---
-        function downloadHandout(moduleName) {
-            alert(`Le téléchargement de la fiche récapitulative PDF pour le "${moduleName}" va démarrer.`);
-        }
-
-        // --- 5. INTERACTIVE QUIZ DATA & LOGIC ---
-        const quizData = [
-            {
-                question: "Quelle est la règle d'or absolue pour démarrer une formule de calcul dans Excel ?",
-                options: [
-                    "Écrire le mot TOTAL en majuscules",
-                    "Commencer obligatoirement par le signe égal (=)",
-                    "Sélectionner toute la colonne avec la souris"
-                ],
-                correct: 1,
-                explanation: "Toute formule dans Excel doit impérativement commencer par le signe '=' pour indiquer au logiciel qu'il s'agit d'un calcul."
-            },
-            {
-                question: "Quelle fonction permet d'additionner automatiquement toute une plage de cellules ?",
-                options: [
-                    "=ADDITION()",
-                    "=SOMME()",
-                    "=COMPTER()"
-                ],
-                correct: 1,
-                explanation: "La fonction =SOMME() est la fonction standard dans la version française d'Excel pour calculer un total."
-            },
-            {
-                question: "Comment sont alignés par défaut les textes et les chiffres dans une cellule Excel ?",
-                options: [
-                    "Les textes à gauche, les chiffres à droite",
-                    "Les textes à droite, les chiffres à gauche",
-                    "Tout est centré automatiquement"
-                ],
-                correct: 0,
-                explanation: "Excel aligne toujours le texte à gauche et les nombres à droite par défaut pour faciliter la lecture des montants."
-            }
-        ];
-
-        let currentQuestion = 0;
-        let score = 0;
-        let answered = false;
-
-        function loadQuestion() {
-            answered = false;
-            const q = quizData[currentQuestion];
-            
-            // Update Progress Bar & Text
-            document.getElementById('quizProgressText').innerText = `Question ${currentQuestion + 1} sur ${quizData.length}`;
-            document.getElementById('quizScoreText').innerText = `Score : ${score} / ${quizData.length}`;
-            document.getElementById('quizProgressBar').style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
-
-            const container = document.getElementById('quizContent');
-            container.innerHTML = `
-                <h3 class="text-lg font-bold text-brand-slate">${q.question}</h3>
-                <div class="space-y-3">
-                    ${q.options.map((option, idx) => `
-                        <button onclick="selectOption(${idx})" class="quiz-option w-full text-left p-4 rounded-xl border border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 transition-all font-medium text-sm text-slate-700 flex items-center justify-between">
-                            <span>${option}</span>
-                            <i class="fa-regular fa-circle text-slate-400 font-normal"></i>
-                        </button>
-                    `).join('')}
-                </div>
-                <div id="quizFeedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                <div id="quizNextBtn" class="hidden text-right">
-                    <button onclick="nextQuestion()" class="bg-brand-blue hover:bg-brand-blueDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md transition-all">
-                        Question suivante <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-            `;
-        }
-
-        function selectOption(index) {
-            if (answered) return;
-            answered = true;
-
-            const q = quizData[currentQuestion];
-            const options = document.querySelectorAll('.quiz-option');
-            const feedback = document.getElementById('quizFeedback');
-            const nextBtn = document.getElementById('quizNextBtn');
-
-            options.forEach((opt, idx) => {
-                opt.disabled = true;
-                if (idx === q.correct) {
-                    opt.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900', 'font-bold');
-                } else if (idx === index) {
-                    opt.classList.add('border-red-500', 'bg-red-50', 'text-red-900');
-                }
-            });
-
-            if (index === q.correct) {
-                score++;
-                feedback.className = "p-4 rounded-xl text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> <strong>Excellente réponse !</strong> ${q.explanation}`;
-            } else {
-                feedback.className = "p-4 rounded-xl text-sm font-medium bg-red-100 text-red-800 border border-red-200";
-                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-2"></i> <strong>Incorrect.</strong> ${q.explanation}`;
-            }
-
-            document.getElementById('quizScoreText').innerText = `Score : ${score} / ${quizData.length}`;
-            feedback.classList.remove('hidden');
-            nextBtn.classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-                loadQuestion();
-            } else {
-                showQuizResult();
-            }
-        }
-
-        function showQuizResult() {
-            document.getElementById('quizContent').classList.add('hidden');
-            const resultScreen = document.getElementById('quizResultScreen');
-            resultScreen.classList.remove('hidden');
-
-            const scoreMsg = document.getElementById('finalScoreMessage');
-            scoreMsg.innerHTML = `Vous avez obtenu un score de <strong>${score} sur ${quizData.length}</strong>.<br>` + 
-                (score === 3 
-                    ? "Parfait ! Vous maîtrisez parfaitement les fondamentaux d'Excel." 
-                    : "Bravo pour vos efforts ! N'hésitez pas à revoir les fiches PDF des modules.");
-        }
-
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            document.getElementById('quizResultScreen').classList.add('hidden');
-            document.getElementById('quizContent').classList.remove('hidden');
-            loadQuestion();
-        }
-
-        // Initialize quiz on load
-        window.onload = function() {
-            loadQuestion();
-        };
-    </script>
+      const resultElement = document.getElementById('quiz-result');
+      if (!selected) {
+        resultElement.innerText = "Veuillez sélectionner une réponse.";
+        resultElement.style.color = "#DC2626";
+      } else if (correct) {
+        resultElement.innerText = "Bravo ! Une formule Excel commence toujours par le signe égal (=).";
+        resultElement.style.color = "#16A34A";
+      } else {
+        resultElement.innerText = "Dommage ! Mauvaise réponse. La bonne réponse est B (Le signe =).";
+        resultElement.style.color = "#DC2626";
+      }
+    }
+  </script>
 </body>
 </html>
